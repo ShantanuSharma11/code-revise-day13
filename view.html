@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Result</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <Style>
+  </Style>
+</head>
+<body class="container mt-5">
+
+  <h1 class="mb-4">User Info from API</h1>
+  <div id="apiResult" class="card p-3 shadow"></div>
+
+  <script>
+    // Get data from localStorage
+    const apiData = JSON.parse(localStorage.getItem("apiData"));
+
+    if (apiData) {
+      // Example: show specific fields if they exist
+      const user = apiData.data ? apiData.data : apiData;
+
+      document.getElementById("apiResult").innerHTML = `
+        <p><strong>ID:</strong> ${user.result.id || "N/A"}</p>
+        <p><strong>Name:</strong> ${user.result.name|| "N/A"}</p>
+        <p><strong>Email:</strong> ${user.result.email || "N/A"}</p>
+        <p><strong>Company:</strong> ${user.result.company || "N/A"}</p>
+        <hr>
+        <h5>Full API Response:</h5>
+        <pre>${JSON.stringify(apiData,null,7)}</pre>
+      `;
+    } else {
+      document.getElementById("apiResult").innerHTML = "<p>No data found. Please log in again.</p>";
+    }
+  </script>
+
+</body>
+</html>
